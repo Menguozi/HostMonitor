@@ -12,7 +12,7 @@ LastEditTime: 2021-05-26 16:37:23
 from json.decoder import JSONDecodeError
 import os, sys
 import json
-from numpy.lib.npyio import save
+# from numpy.lib.npyio import save
 import pandas as pd
 
 root_path = ''
@@ -49,14 +49,14 @@ class getData:
                 file_path = os.path.join(sub_path, file)
                 # 按比例提取训练集、验证集
                 df = pd.read_csv(file_path)
-                pos_data = df[df[str_failure] == int_pos].fillna(method='ffill', axis=1)
+                pos_data = df[df[str_failure] == int_pos].ffill(axis=1)
                 if pos_data.shape[0] == 0:
                     continue
                 neg_data = df[df[str_failure] == int_neg]
                 neg_num = int(pos_data.shape[0] / self.scale_)
                 if neg_num > neg_data.shape[0]:
                     neg_num = neg_data.shape[0]
-                neg_data = neg_data.sample(n=neg_num, random_state=18).fillna(method='ffill', axis=1)
+                neg_data = neg_data.sample(n=neg_num, random_state=18).ffill(axis=1)
                 train_data = pd.concat([train_data, pos_data, neg_data])
 
             #print(train_data)

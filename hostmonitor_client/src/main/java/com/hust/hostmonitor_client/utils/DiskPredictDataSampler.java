@@ -83,8 +83,8 @@ public class DiskPredictDataSampler extends Thread {
         public int run(String[] strings) {
             try {
                 Runtime rt = Runtime.getRuntime();
-                System.out.println("python3");
-                Process process=rt.exec("python3 "+sampleFilePath);
+                System.out.println("python");
+                Process process=rt.exec("python "+sampleFilePath);
                 BufferedReader stdInput=new BufferedReader(new InputStreamReader(process.getInputStream()));
                 BufferedReader ErrInput=new BufferedReader(new InputStreamReader(process.getErrorStream()));
 
@@ -98,7 +98,7 @@ public class DiskPredictDataSampler extends Thread {
 
                 stdInput.close();
                 ErrInput.close();
-                System.out.println("python3 finishes");
+                System.out.println("python finishes");
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -1,3 +1,2 @@
 ip,userName,password,proxyId,OSType,router
-168.14.2.11,root,pass1234,0,linux,168.14.2.1
-168.14.2.10,root,pass1234,0,linux ,168.14.2.1
+10.17.18.1,root,D202381498,0,linux,10.17.23.254

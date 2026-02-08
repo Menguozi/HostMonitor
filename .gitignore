@@ -34,9 +34,6 @@ build/
 .vscode/
 
 
-
-*.iml
-
 ###故障预测-库文件
 /DiskPredict/DiskPredictModule/Lib/**
 !/DiskPredict/DiskPredictModule/Lib/site-packages.rar

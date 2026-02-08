@@ -8,11 +8,11 @@ public class ProcessProvider {
     public String insertProcessRecord(){
         String SQL=null;
         if(dataSourceSelect==0){
-            SQL="insert into ProcessData values(" +
+            SQL="insert into processData values(" +
                     "#{ip},#{timestamp},#{pid},#{uid},#{readKbps},#{writeKbps},#{command})";
         }
         else if (dataSourceSelect==1){
-            SQL="insert into storagedevicemonitor.ProcessData values(" +
+            SQL="insert into storageDeviceMonitor.processData values(" +
                     "#{ip},#{timestamp},#{pid},#{uid},#{readKbps},#{writeKbps},#{command})";
         }
         return SQL;

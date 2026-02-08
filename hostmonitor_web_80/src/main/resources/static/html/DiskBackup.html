@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="../images/whuh_logo_only.jpg" type="image/png">
     <!-- JQuery -->
     <script type="text/javascript" src="../JQuery/jquery-3.3.1.min.js"></script>
     <!-- popper 用于下拉框 -->
@@ -42,7 +43,7 @@
     <div class="col-sm-6 " >
         <div class="card overflow-auto" style="height: 1000px;">
             <h5 class="card-header">
-                源硬盘
+                预警硬盘
             </h5>
             <div class="card-body">
                 <ul id="originDiskList" class="nav flex-column">
@@ -52,7 +53,7 @@
                             <li class="nav-item DiskCheckNavItem">
                                 <div class="form-check form-check-inline">
                                     <input id="1" class="form-check-input DiskCheckBox" type="checkbox">
-                                    <label for="1" class="form-check-label h5">fgh</label>
+                                    <label for="1" class="form-check-label h5">sdX</label>
                                 </div>
                             </li>
                         </ul>
@@ -63,12 +64,23 @@
     </div>
 
     <div class="col-sm-6">
-        <div class="card">
+        <div class="card overflow-auto" style="height: 1000px;">
             <h5 class="card-header">
-                目标硬盘
+                替补硬盘
             </h5>
             <div class="card-body">
                 <ul id="destinationDiskList" class="nav flex-column">
+                    <li class="nav-item">
+                        <label id="NavCollapse1" href="#homeSubmenu" data-toggle="collapse" class=" dropdown-toggle h5">8.8.8.8</label>
+                        <ul id="homeSubmenu" class="collapse list-unstyled show">
+                            <li class="nav-item DiskCheckNavItem">
+                                <div class="form-check form-check-inline">
+                                    <input id="1" class="form-check-input DiskCheckBox" type="checkbox">
+                                    <label for="1" class="form-check-label h5">sdY</label>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>

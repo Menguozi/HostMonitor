@@ -43,8 +43,15 @@ public class JschSSHManager implements SSHManager {
 
                 //设置代理
                 if(hostConfigInfo.hasProxy()){
-                    ProxyHTTP proxyHTTP = new ProxyHTTP(hostConfigInfo.proxyConfigData.proxyIp,hostConfigInfo.proxyConfigData.proxyPort);
-                    currentSession.setProxy(proxyHTTP);
+                    if(hostConfigInfo.isHttpProxy()) {
+                        ProxyHTTP proxyHTTP = new ProxyHTTP(hostConfigInfo.proxyConfigData.proxyIp,hostConfigInfo.proxyConfigData.proxyPort);
+                        currentSession.setProxy(proxyHTTP);
+                    }
+                    else {
+                        ProxySOCKS5 proxySOCKS5 = new ProxySOCKS5(hostConfigInfo.proxyConfigData.proxyIp,hostConfigInfo.proxyConfigData.proxyPort);
+                        currentSession.setProxy(proxySOCKS5);
+                    }
+
                 }
 
                 currentSession.connect(1000);

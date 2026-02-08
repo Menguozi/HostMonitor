@@ -150,9 +150,10 @@ public class ConfigDataManager {
             for(int i=0;i<proxyList.size();i++){
                 JSONObject currentProxy = proxyList.getJSONObject(i);
                 int proxyId = currentProxy.getInteger("proxyId");
+                String proxyType = currentProxy.getString("proxyType");
                 String proxyIp = currentProxy.getString("proxyIp");
                 int proxyPort = currentProxy.getInteger("proxyPort");
-                proxyMap.put(proxyId,new ProxyConfigData(proxyId,proxyIp,proxyPort));
+                proxyMap.put(proxyId,new ProxyConfigData(proxyId,proxyType,proxyIp,proxyPort));
             }
         }
 
@@ -160,8 +161,8 @@ public class ConfigDataManager {
         List<HostConfigData> hostConfigDataList = new ArrayList<HostConfigData>();
         System.out.println(hostConfigDataList.size());
         {
-            JSONArray hostList = readCSV(rootPath+ "/ConfigData/Server/HostListVmware.csv");
-            //JSONArray hostList = readCSV(rootPath+ "/ConfigData/Server/HostListTest.csv");
+//            JSONArray hostList = readCSV(rootPath+ "/ConfigData/Server/HostListVmware.csv");
+            JSONArray hostList = readCSV(rootPath+ "/ConfigData/Server/HostListTest.csv");
             for(int i=0;i<hostList.size();i++){
                 JSONObject currentHost = hostList.getJSONObject(i);
                 String ip = currentHost.getString("ip");

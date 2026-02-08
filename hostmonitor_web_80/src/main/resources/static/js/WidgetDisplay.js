@@ -1,5 +1,5 @@
 //标题
-var titleName = "数据中心资源智能运维系统";
+var titleName = "华中科技大学同济医学院附属协和医院业务容灾及数据备份项目（一期）磁盘预警系统";
 //titleName = "舰船"+titleName;
 
 
@@ -36,15 +36,15 @@ var minRequireUserType = [
 ];
 
 var innerHTMLList = [
-    icon_home + '资源整体概况',
-    icon_bar + '节点资源详情',
-    icon_empty + icon_bar + '数据分析',
+    icon_home + '系统概况',
+    icon_bar + '节点详情',
+    icon_empty + icon_file + '数据分析',
     icon_empty + icon_file + '故障查询',
     icon_empty + icon_file + '模型训练',
-    icon_file + '系统设置',
-    icon_file + '系统用户管理',
-    icon_file + '节点测速',
-    icon_file + '数据备份',
+    icon_bar + '系统设置',
+    icon_bar + '用户管理',
+    icon_bar + '节点测速',
+    icon_bar + '数据备份',
 ];
 
 var signInSrc = "/Signin";
@@ -68,11 +68,11 @@ function FInitNav(){
     //标题
 
     //"数据中心资源监控"
-    document.getElementById("PageTitle").innerText = titleName;
-    document.getElementById("Title").innerText = titleName;
+    // document.getElementById("PageTitle").innerText = titleName;
+    // document.getElementById("Title").innerText = titleName;
 
     //折叠栏
-    document.getElementById("NavCollapse1").innerHTML = icon_file + '故障预测';
+    document.getElementById("NavCollapse1").innerHTML = icon_bar + '故障预测';
 
     //登录按钮
     var UserBtn = document.getElementById("UserBtn");

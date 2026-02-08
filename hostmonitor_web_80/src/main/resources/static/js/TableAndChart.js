@@ -258,7 +258,7 @@ const tableColumns = {
         },
         {
             field: 'netReceiveSpeed',
-            title: '网络接受',
+            title: '网络接收',
             width: 70,
             formatter : function (value, row, index) {
                 return FTableColorFormaterCustomColor(FGetKbWithUnit(value) +"/s");
@@ -274,7 +274,7 @@ const tableColumns = {
         },
         {
             field: 'diskTotalIOPS',
-            title: 'iops',
+            title: 'IOPS',
             width: 50,
             sortable: true,
             formatter : function (value, row, index) {
@@ -342,7 +342,7 @@ const tableColumns = {
         },
         {
             field: 'diskIOPS',
-            title: 'iops',
+            title: 'IOPS',
             width: 100,
             sortable: true,
             formatter : function (value, row, index) {
@@ -398,7 +398,7 @@ const tableColumns = {
         },
         {
             field: 'netReceiveSpeed',
-            title: '网络接受',
+            title: '网络接收',
             width: 100,
             formatter : function (value, row, index) {
                 return FTableColorFormaterCustomColor(FGetKbWithUnit(value)+"/s");
@@ -512,7 +512,7 @@ const tableColumns = {
         },
         {
             field: 'diskReadSpeed',
-            title: '磁盘读取速度',
+            title: '硬盘读取速度',
             width: 50,
             sortable: true,
             formatter : function (value, row, index) {
@@ -521,7 +521,7 @@ const tableColumns = {
         },
         {
             field: 'diskWriteSpeed',
-            title: '磁盘写入速度',
+            title: '硬盘写入速度',
             width: 50,
             sortable: true,
             formatter : function (value, row, index) {
@@ -662,7 +662,7 @@ const tableColumns = {
         },
         {
             field: 'ioTestLastTime',
-            title: '测速时间',
+            title: '测试时间',
             width: 100,
             sortable: true,
             formatter : function (value, row, index) {
@@ -676,7 +676,7 @@ const tableColumns = {
         },
         {
             field: 'readSpeed',
-            title: '读速度',
+            title: '读取带宽',
             width: 50,
             sortable: true,
             formatter : function (value, row, index) {
@@ -690,7 +690,7 @@ const tableColumns = {
         },
         {
             field: 'writeSpeed',
-            title: '写速度',
+            title: '写入宽带',
             width: 50,
             sortable: true,
             formatter : function (value, row, index) {
@@ -1297,7 +1297,7 @@ var summaryChartOption = {
     option: {
         title: [
             {
-                text: "CPU负载统计",
+                text: "计算负载统计",
                 left: '11%',
                 top: '0px',
             },
@@ -1307,7 +1307,7 @@ var summaryChartOption = {
                 top: '0px',
             },
             {
-                text: "磁盘负载统计",
+                text: "硬盘负载统计",
                 left: '79%',
                 top: '0px',
             },
@@ -1380,13 +1380,13 @@ function FRefreshDFPSummaryChart(currentChart,currentData){
 
 //获取ChartOption-TrendChart
 function FGetTrendChartOption(show_iops){
-    var titleName = ["CPU利用率","内存利用率","硬盘IO","网络IO"];
+    var titleName = ["计算利用率","内存利用率","硬盘IO","网络IO"];
     var unitLabel =["%","%","Kb/s","Kb/s"];
-    var seriesName = ["CPU利用率","内存利用率","硬盘读取","硬盘写入","网络接受","网络发送"];
+    var seriesName = ["计算利用率","内存利用率","硬盘读取","硬盘写入","网络接收","网络发送"];
     if(show_iops){
-        titleName = ["CPU利用率","IOPS","硬盘IO","网络IO"];
+        titleName = ["CPU","IOPS","硬盘IO","网络IO"];
         unitLabel =["%","","Kb/s","Kb/s"];
-        seriesName = ["CPU利用率","IOPS","硬盘读取","硬盘写入","网络接受","网络发送"];
+        seriesName = ["CPU","IOPS","硬盘读取","硬盘写入","网络接收","网络发送"];
     }
 
 
@@ -1528,9 +1528,9 @@ function FGetTrendChartOption(show_iops){
 }
 
 function FGetHostDynamicChartOption(hostList){
-    var titleName = ["CPU利用率","内存利用率","存储容量","网络IO"];
+    var titleName = ["计算利用率","内存利用率","存储利用率","网络利用率"];
     var unitLabel =["%","%","%","Kb/s"];
-    var seriesName = ["CPU利用率","内存利用率","存储容量","网络接受","网络发送"];
+    var seriesName = ["计算利用率","内存利用率","存储利用率","网络接受","网络发送"];
     var trendChartOption = {
         title:[
             {
@@ -1658,7 +1658,7 @@ function FGetHostDynamicChartOption(hostList){
 function FGetDFPSummaryChartOption(){
     var option = JSON.parse(JSON.stringify(summaryChartOption["option"]));
     option["title"] = {
-        text: "故障预测统计",
+        text: "预警硬盘负荷",
         left:'33%',
     };
     var tempGaugeOption = JSON.parse(JSON.stringify(summaryChartOption["gaugeOption"]));
@@ -1755,7 +1755,7 @@ function FGetFailureTypeStatisticsChartOption(diskType,hddCount,ssdCount){
     };
     var FailureTypeStatisticsChartOption = {
         title: {
-            text: "故障类型统计",
+            text: "预警硬盘类型",
             left: '48%',
         },
         grid: {
@@ -1815,7 +1815,7 @@ function FGetFailureTypeStatisticsChartOption(diskType,hddCount,ssdCount){
 function FGetFailureCountStatisticsChartOption(seriesData){
     var FailureCountStatisticsChartOption = {
         title: {
-            text: "故障盘数量趋势",
+            text: "预警硬盘数量趋势",
             left: '48%',
         },
         grid: {

@@ -146,7 +146,7 @@ class predict:
                 group_chunk = chunk.groupby(by=[str_model])
                 for key, group in group_chunk:
                     group.dropna(how='all', axis=1, inplace=True)
-                    group = group.fillna(method='ffill', axis=1)
+                    group = group.ffill(axis=1)
                     model_name = self.get_model_name(key, list(group.columns)[index_dict['data']:])
                     if model_name not in model_dict.keys():
                         model_dict[model_name] = self.load_model(model_name=model_name)

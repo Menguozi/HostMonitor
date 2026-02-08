@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="../images/whuh_logo_only.jpg" type="image/png">
     <!-- JQuery -->
     <script type="text/javascript" src="../JQuery/jquery-3.3.1.min.js"></script>
     <!-- popper 用于下拉框 -->
@@ -39,7 +40,7 @@
     <div style="width:100%;height: 20px;"></div>
 
     <div class="card" >
-        <h2 class="card-header h2">节点分布图</h2>
+        <h2 class="card-header h2">节点分布</h2>
         <div class="card-body">
             <div class="media text-muted pt-3" style="min-height:300px;height:auto;overflow-x:scroll;overflow-y: hidden;position: relative">
                 <div id="TopologyChart" style="min-height: 300px;position: absolute"></div>
@@ -49,7 +50,7 @@
     <div style="width:100%;height: 20px;"></div>
 
     <div class="card" >
-        <h2 class="card-header h2">节点资源使用情况</h2>
+        <h2 class="card-header h2">资源占用</h2>
         <div class="card-body">
             <div id="TrendChart" style="width: 100%;height: 1600px;"></div>
         </div>
@@ -172,7 +173,7 @@
         var result = "";
         result+= "CPU利用率:" + getColoredTxt(nodeData["cpuUsage"],threshold["cpuUsage"])+"%</br>" +
             "内存利用率:" + getColoredTxt(parseFloat(nodeData["memoryUsage"]),threshold["memoryUsage"])+"%</br>" +
-            "存储容量:" + getColoredTxt(parseFloat(nodeData["diskCapacityUsage"]),threshold["diskCapacityUsage"])+"%</br>" +
+            "存储利用率:" + getColoredTxt(parseFloat(nodeData["diskCapacityUsage"]),threshold["diskCapacityUsage"])+"%</br>" +
             "网络接受:" + getColoredTxt(nodeData["netSendSpeed"],threshold["netSendSpeed"])+"kb/s</br>" +
             "网络发送:" + getColoredTxt(nodeData["netReceiveSpeed"],threshold["netReceiveSpeed"])+"kb/s</br>" ;
         return result;

@@ -8,11 +8,11 @@ public class DispersedProvider {
     public String insertNewRecord(){
         String SQL=null;
         if(dataSourceSelect==0){
-            SQL= "insert into DispersedMonitorRecord values (" +
+            SQL= "insert into dispersedMonitorRecord values (" +
                     "#{hostname},#{ip},#{timestamp},#{MemUsage},#{CpuUsage},#{NetRecv},#{NetSent},#{DiskReadRates},#{DiskWriteRates},#{IOPS})";
         }
         else if (dataSourceSelect==1){
-            SQL= "insert into storagedevicemonitor.DISPERSEDMONITORRECORD values (" +
+            SQL= "insert into storagedevicemonitor.dispersedMonitorRecord values (" +
                     "#{hostname},#{ip},#{timestamp},#{MemUsage},#{CpuUsage},#{NetRecv},#{NetSent},#{DiskReadRates},#{DiskWriteRates},#{IOPS})";
         }
         return SQL;
@@ -20,12 +20,12 @@ public class DispersedProvider {
     public String queryRecordsWithTimeLimit(){
         String SQL=null;
         if(dataSourceSelect==0){
-            SQL="Select * from DispersedMonitorRecord " +
+            SQL="Select * from dispersedMonitorRecord " +
                     "where ip=#{ip} and timestamp<#{highbound} and timestamp>#{lowbound} " +
                     "order by timestamp";
         }
         else if (dataSourceSelect==1){
-            SQL="Select * from storagedevicemonitor.DispersedMonitorRecord " +
+            SQL="Select * from storagedevicemonitor.dispersedMonitorRecord " +
                     "where ip=#{ip} and timestamp<#{highbound} and timestamp>#{lowbound} " +
                     "order by timestamp";
         }

@@ -30,6 +30,6 @@ sms_config:
   tpl-id-1: 234103
   key: a1a2f8b334adea73c4de5c848848959b
 
-UseEnv: YIYAO
+UseEnv: CSDDC
   #CSDDC 701
   #YIYAO 医药

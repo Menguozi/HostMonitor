@@ -2,6 +2,9 @@ package com.hust.hostmonitor_data_collector.utils.SSHConnect;
 
 
 import com.hust.hostmonitor_data_collector.utils.OSType;
+import org.python.modules._weakref.ProxyType;
+
+import java.util.Objects;
 
 public class HostConfigData {
     //IP
@@ -46,6 +49,11 @@ public class HostConfigData {
     public boolean hasProxy(){
         return proxyConfigData != null;
     }
+
+    public boolean isHttpProxy(){
+        return Objects.equals(proxyConfigData.proxyType, "http");
+    }
+
     @Override
     public String toString(){
         return "["+ ip +"," + userName+","+ password+","+ proxyConfigData +","+osType+","+router+"]";

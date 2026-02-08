@@ -9,7 +9,7 @@ spring:
     #贵州农商行
     #url: jdbc:mysql://
     username: root
-    password: b511
+    password: D202381498
   mail:
     host: smtp.163.com
     username: abitervx@163.com
