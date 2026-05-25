@@ -1,5 +1,5 @@
 ip,userName,password,proxyId,OSType,router
-10.17.18.1,root,D202381498,0,linux,10.17.23.254
-192.168.0.15,root,D202381498,1,linux,192.168.0.254
-192.168.0.16,root,D202381498,1,linux,192.168.0.254
-192.168.0.17,root,D202381498,1,linux,192.168.0.254
+10.17.18.43,root,D202381498,0,linux,10.17.23.254
+192.168.0.15,root,Root@TanServer,1,linux,192.168.0.254
+192.168.0.16,root,Root@TanServer,1,linux,192.168.0.254
+192.168.0.17,root,Root@TanServer,1,linux,192.168.0.254

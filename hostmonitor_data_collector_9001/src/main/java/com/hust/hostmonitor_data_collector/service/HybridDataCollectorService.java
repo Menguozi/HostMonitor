@@ -13,6 +13,7 @@ import com.hust.hostmonitor_data_collector.utils.*;
 import com.hust.hostmonitor_data_collector.utils.DiskPredict.DiskPredict;
 import com.hust.hostmonitor_data_collector.utils.DiskPredict.DiskPredictProgress;
 import com.hust.hostmonitor_data_collector.utils.DiskPredict.QueryResources;
+import com.hust.hostmonitor_data_collector.utils.SSHConnect.ProxyConfigData;
 import com.hust.hostmonitor_data_collector.utils.SocketConnect.DataReceiver;
 import com.hust.hostmonitor_data_collector.utils.SocketConnect.SpecialProcessor;
 import com.hust.hostmonitor_data_collector.utils.linuxsample.LinuxDataProcess;
@@ -21,7 +22,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.File;
-import java.sql.Time;
+import java.io.FileNotFoundException;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -1314,5 +1315,45 @@ public class HybridDataCollectorService implements DataCollectorService{
         String result=null;
         diskFailureMapper.updateDiskState(diskSerial,state,new Timestamp(new Date().getTime()));
         return result;
+    }
+
+    public String addHostNode(JSONObject jsonParam) throws FileNotFoundException {
+        ConfigDataManager configDataManager = ConfigDataManager.getInstance();
+        String filePath = "./ConfigData/Server/HostListTest.csv";
+        List<String> headers = new ArrayList<>(Arrays.asList("HostIP", "UserName", "UserPassword", "ProxyType", "OsType", "RouterIP"));
+        configDataManager.appendCSV(filePath, headers, jsonParam);
+
+        DataSampleManager dataSampleManager =  DataSampleManager.getInstance();
+        String hostIP = jsonParam.getString("HostIP");
+        String osType = jsonParam.getString("OsType");
+        String userName = jsonParam.getString("UserName");
+//        String userType = jsonParam.getString("UserType");
+        String userPassword = jsonParam.getString("UserPassword");
+//        String proxyType = jsonParam.getString("ProxyType");
+        String proxyIP = jsonParam.getString("ProxyIP");
+        String routerIP = jsonParam.getString("RouterIP");
+        //代理
+        Map<String, ProxyConfigData> proxyMap = new HashMap<>();
+        {
+            JSONArray proxyList = configDataManager.readCSV("./ConfigData/Server/Proxy.csv");
+            for(int i=0;i<proxyList.size();i++){
+                JSONObject currentProxy = proxyList.getJSONObject(i);
+                int existedProxyId = currentProxy.getInteger("proxyId");
+                String existedProxyType = currentProxy.getString("proxyType");
+                String existedProxyIp = currentProxy.getString("proxyIp");
+                int existedProxyPort = currentProxy.getInteger("proxyPort");
+                proxyMap.put(existedProxyIp,new ProxyConfigData(existedProxyId,existedProxyType,existedProxyIp,existedProxyPort));
+            }
+        }
+        ProxyConfigData proxyConfigData = null;
+        if(proxyMap.containsKey(proxyIP)){
+            proxyConfigData = proxyMap.get(proxyIP);
+        }
+
+        OSType oSType = OSType.valueOf(osType.toUpperCase());
+
+        dataSampleManager.hostList.add(new HostConfigData(hostIP,userName,userPassword,proxyConfigData,oSType,routerIP));
+
+        return "true";
     }
 }

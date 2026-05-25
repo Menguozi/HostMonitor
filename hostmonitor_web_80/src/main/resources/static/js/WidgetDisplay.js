@@ -20,6 +20,7 @@ function FGetNavItems(){
         document.getElementById("NavItem7"),
         document.getElementById("NavItem8"),
         document.getElementById("NavItem9"),
+        document.getElementById("NavItem10"),
     ];
 }
 
@@ -45,6 +46,7 @@ var innerHTMLList = [
     icon_bar + '用户管理',
     icon_bar + '节点测速',
     icon_bar + '数据备份',
+    icon_bar + '添加节点',
 ];
 
 var signInSrc = "/Signin";
@@ -59,6 +61,7 @@ var srcHtml = [
     "UserManagement.html",
     "SpeedMeasurement.html",
     "DiskBackup.html",
+    "AddHost.html",
 ];
 
 
@@ -133,8 +136,6 @@ function FInitNav(){
             '    <a id="HostItem'+i+'" class="nav-link" href="#" onclick="FSelectHost('+ hostIpList.length + ","+ i + ')">'+icon_empty +icon_file +hostIpList[i] +'</a>\n' +
             '</li>';
     }
-
-
 }
 
 function FSelectHost(count, index){

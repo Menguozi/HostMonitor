@@ -9,11 +9,9 @@ import com.hust.hostmonitor_data_collector.utils.SSHConnect.ProxyConfigData;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Value;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 //配置数据管理类
@@ -118,6 +116,23 @@ public class ConfigDataManager {
                 }
                 csvWriter.writeRecord(rowData.toArray(new String[0]));
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            csvWriter.close();
+        }
+    }
+
+    public void appendCSV(String filePath,List<String> headers,JSONObject jsonParam) throws FileNotFoundException {
+        FileOutputStream fileOutputStream = new FileOutputStream(filePath, true); // true 表示追加
+        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream, StandardCharsets.UTF_8);
+        CsvWriter csvWriter = new CsvWriter(outputStreamWriter, ',');
+        try {
+            List<String> record = new ArrayList<>();
+            for(int i=0;i<headers.size();i++){
+                record.add(jsonParam.getString(headers.get(i)));
+            }
+            csvWriter.writeRecord(record.toArray(new String[0]));
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

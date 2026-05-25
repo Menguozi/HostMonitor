@@ -183,4 +183,10 @@ public class DataSampleController_Remote {
     public String setDiskState(@RequestBody JSONObject jsonParam){
         return restTemplate.postForObject(dataCollectorUrl + "/getDFPInfo/setDiskState", jsonParam,String.class);
     }
+
+    @PostMapping(value="/addHostNode",produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String addHostNode(@RequestBody JSONObject jsonParam){
+        return restTemplate.postForObject(dataCollectorUrl + "/addHostNode", jsonParam, String.class);
+    }
 }

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="icon" href="../images/whuh_logo_only.jpg" type="image/png">
+    <!-- JQuery -->
+    <script type="text/javascript" src="../JQuery/jquery-3.3.1.min.js"></script>
+    <!-- popper 用于下拉框 -->
+    <script type="text/javascript" src="../popper/popper.min.js"></script>
+    <!-- BootStrap -->
+    <link rel="stylesheet" href= "../bootstrap-4.3.1-dist/css/bootstrap.min.css" >
+    <script type="text/javascript" src="../bootstrap-4.3.1-dist/js/bootstrap.js"></script>
+
+    <!-- ECharts -->
+    <script type="text/javascript" src="../echarts/echarts.min.js"></script>
+    <!-- functionLibrary -->
+    <script type="text/javascript" src="../js/DataRequest.js"></script>
+    <script type="text/javascript" src="../js/WidgetDisplay.js"></script>
+    <script type="text/javascript" src="../js/TableAndChart.js"></script>
+
+    <!-- Bootstrap-table -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="../bootstrap-table/bootstrap-table.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="../bootstrap-table/bootstrap-table.min.js"></script>
+    <!-- Latest compiled and minified Locales -->
+    <script src="../bootstrap-table/bootstrap-table-zh-CN.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="py-5 text-center">
+            <img class="d-block mx-auto mb-4" src="../images/whuh_logo_only.jpg" alt="" width="72" height="72">
+            <p class="lead"></p>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-7 order-md-1">
+                <h4 class="mb-3">节点信息</h4>
+                <div class="needs-validation" novalidate="">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                                <label for="HostIP">IP地址</label>
+                                <input id="HostIP" type="text" class="form-control" placeholder="192.168.0.15">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="OsType">操作系统</label>
+                            <select id="OsType" class="custom-select">
+                                <option value="linux" selected>Linux</option>
+                                <option value="windows">Windows</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="UserName">监控用户</label>
+                            <input id="UserName" type="text" class="form-control" placeholder="root">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="UserType">用户类型</label>
+                            <select id="UserType" class="custom-select">
+<!--                                <option value="0" >普通用户</option>-->
+                                <option value="0" selected>管理员</option>
+                                <option value="1">超级管理员</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="UserPassword">用户密码</label>
+                        <input id="UserPassword" type="password" class="form-control"  placeholder="password">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="ProxyType">代理类型</label>
+                            <select id="ProxyType" class="custom-select">
+                                <option value="0" >直连</option>
+                                <option value="1" selected>http</option>
+                                <option value="2">socks</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="ProxyIP">代理地址</label>
+                            <input id="ProxyIP" type="text" class="form-control" placeholder="222.20.98.78">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="RouterIP">网关地址</label>
+                        <input id="RouterIP" type="text" class="form-control" placeholder="192.168.0.254">
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-md-4 mb-3">
+                            <button class="btn btn-primary btn-lg btn-block" onclick="addHostNodeOnclick()">添加节点</button>
+                        </div>
+                    </div>
+              </div>
+            </div>
+        </div>
+        <footer class="my-5 pt-5 text-muted text-center text-small">
+        </footer>
+    </div>
+</body>
+<script>
+    var HostIP = document.getElementById("HostIP");
+    var OsType = document.getElementById("OsType");
+    var UserName = document.getElementById("UserName");
+    var UserType = document.getElementById("UserType");
+    var UserPassword = document.getElementById("UserPassword");
+    var ProxyType = document.getElementById("ProxyType");
+    var ProxyIP = document.getElementById("ProxyIP");
+    var RouterIP = document.getElementById("RouterIP");
+
+    //加载后执行
+    window.onload=function (){
+        refreshAddHostUI();
+    }
+
+    function refreshAddHostUI(){
+        HostIP.value = "192.168.0.15";
+        OsType.value = "linux";
+        UserName.value = "root";
+        UserType.value = "0";
+        UserPassword.value = "password";
+        ProxyType.value = "1";
+        ProxyIP.value = "222.20.98.78";
+        RouterIP.value = "192.168.0.254";
+    }
+
+    /**
+     * 自定义 jQuery 弹窗提示函数
+     * @param {string} message - 提示的文字内容
+     */
+    function showCustomAlert(message) {
+        // 1. 动态创建遮罩层和弹窗结构，将参数 message 拼接到内容区域
+        var $alertBox = $(
+            '<div id="customAlert" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:9999; display:flex; align-items:center; justify-content:center;">' +
+            '<div style="background:#fff; padding:20px 40px; border-radius:8px; text-align:center; box-shadow:0 2px 10px rgba(0,0,0,0.3); min-width: 250px;">' +
+            '<h3 style="margin-top:0; color:#e74c3c;">⚠️ 提示</h3>' +
+            '<p style="font-size:16px; color:#333; margin: 15px 0;">' + message + '</p>' + // 这里动态嵌入文字
+            '<button id="closeAlertBtn" style="background:#3498db; color:#fff; border:none; padding:8px 20px; border-radius:4px; cursor:pointer; font-size:14px;">确定</button>' +
+            '</div>' +
+            '</div>'
+        );
+
+        // 2. 将弹窗追加到 body 中显示
+        $('body').append($alertBox);
+
+        // 3. 绑定点击“确定”按钮关闭（移除）弹窗的事件
+        // 使用 .one() 确保点击事件只触发一次，触发后自动销毁绑定，更节省内存
+        $("#closeAlertBtn").one("click", function() {
+            $("#customAlert").remove();
+        });
+    }
+
+    //添加节点
+    function addHostNodeOnclick(){
+        var user = FGetUser();
+        if (!user) {
+            showCustomAlert("请先登录后再进行操作");
+            return; // 退出当前函数
+        }
+        console.log(user["userID"]);
+        console.log(user["password"]);
+        console.log(HostIP.value);
+        console.log(OsType.value);
+        console.log(UserName.value);
+        console.log(UserType.value);
+        console.log(UserPassword.value);
+        console.log(ProxyType.value);
+        console.log(ProxyIP.value);
+        console.log(RouterIP.value);
+        var paramData = {
+            WebUserID: user["userID"],
+            WebUserPassword: user["password"],
+            HostIP: HostIP.value,
+            OsType: OsType.value,
+            UserName: UserName.value,
+            UserType: UserType.value,
+            UserPassword: UserPassword.value,
+            ProxyType: ProxyType.value,
+            ProxyIP: ProxyIP.value,
+            RouterIP: RouterIP.value,
+        };
+
+        FSendPostRequest(false,"/addHostNode",JSON.stringify(paramData),function (resultData){
+            console.log(resultData);
+            if(resultData === "true") {
+                showCustomAlert("该节点已成功加入监控");
+                refreshAddHostUI();
+            } else {
+                showCustomAlert("该用户不具备管理权限");
+            }
+        });
+    }
+</script>
+</html>

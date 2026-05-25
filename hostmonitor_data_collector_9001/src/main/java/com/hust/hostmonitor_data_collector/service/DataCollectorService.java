@@ -1,9 +1,9 @@
 package com.hust.hostmonitor_data_collector.service;
 
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -27,15 +27,11 @@ public interface DataCollectorService {
     String getDFPSummary();
     HashMap<String,JSONObject> getSocketMap();
     void setAllDiskDFPState(String hostIp, boolean b);
-
     String getAllHostsInfoDetail();
-
     String getHostsRouterInfo();
-
     String remoteTest(String nodeIp);
-
     void updateSystemSetting(JSONObject newSystemSetting);
     String test();
-
     String setDiskState(String diskSerial,boolean state);
+    String addHostNode(JSONObject hostParam) throws FileNotFoundException;
 }

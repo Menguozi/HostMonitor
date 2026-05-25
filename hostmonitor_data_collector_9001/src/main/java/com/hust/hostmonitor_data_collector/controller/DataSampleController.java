@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.io.FileNotFoundException;
 import java.util.Map;
 
 @Controller
@@ -167,4 +168,36 @@ public class DataSampleController {
         return dataCollectorService.test();
     }
 
+    @PostMapping(value="/addHostNode",produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String addHostNode(@RequestBody JSONObject jsonParam) throws FileNotFoundException {
+        //服务端身份验证-管理员
+        String webUserID = jsonParam.getString("WebUserID");
+        String webPassword = jsonParam.getString("WebUserPassword");
+        if(!dataCollectorService.userAuthoirtyCheck(webUserID,webPassword,1)){
+            return "false";
+        }
+
+        String hostIP = jsonParam.getString("HostIP");
+        String osType = jsonParam.getString("OsType");
+        String userName = jsonParam.getString("UserName");
+        String userType = jsonParam.getString("UserType");
+        String userPassword = jsonParam.getString("UserPassword");
+        String proxyType = jsonParam.getString("ProxyType");
+        String proxyIP = jsonParam.getString("ProxyIP");
+        String routerIP = jsonParam.getString("RouterIP");
+
+        System.out.println(webUserID);
+        System.out.println(webPassword);
+        System.out.println(hostIP);
+        System.out.println(osType);
+        System.out.println(userName);
+        System.out.println(userType);
+        System.out.println(userPassword);
+        System.out.println(proxyType);
+        System.out.println(proxyIP);
+        System.out.println(routerIP);
+
+        return dataCollectorService.addHostNode(jsonParam);
+    }
 }
